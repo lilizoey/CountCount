@@ -50,3 +50,7 @@ database/
 - __init__.py
 - ...
 ```
+
+### Documentation
+
+We will use numpy-style docstrings

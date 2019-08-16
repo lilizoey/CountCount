@@ -6,6 +6,7 @@ from bot import bot
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
+
     try:
         token = os.environ["DISCORD_TOKEN"]
     except KeyError as k:

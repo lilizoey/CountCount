@@ -18,7 +18,16 @@
 """
 
 from bot import bot
+from database import queries
 
 @bot.command()
 async def ping(ctx):
     await ctx.send(f"Pong! {bot.latency}")
+
+@bot.command()
+async def get(ctx):
+    await ctx.send(queries.get_all_counts(ctx.message.author.id))
+
+@bot.command()
+async def count(ctx):
+    queries.count(ctx.message.author.id)

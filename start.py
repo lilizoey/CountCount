@@ -22,8 +22,10 @@ import os, sys
 
 from commands import *
 from bot import bot
+from database import queries
 
 if __name__ == "__main__":
+
     logging.basicConfig(level=logging.INFO)
 
     try:
@@ -32,5 +34,6 @@ if __name__ == "__main__":
         logger = logging.getLogger("discord")
         logger.error("DISCORD_TOKEN environment variable is not set.")
         sys.exit(1)
-        
+    
+    queries.initialize_counts()
     bot.run(token) 

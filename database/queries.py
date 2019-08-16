@@ -17,6 +17,19 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+import sqlite3
+conn = sqlite3.connect("database.sqlite3")
+c = conn.cursor()
+
+def initialize_counts():
+    c.execute("""
+    CREATE TABLE IF NOT EXISTS Count_Data (
+        count_i Integer PRIMARY KEY AUTOINCREMENT,
+        user_id Integer NOT NULL
+    )
+    """)
+    conn.commit()
+
 def get_all_counts(user_id):
     """
     Gets all the counts that the given user has made using the bot.
@@ -32,4 +45,8 @@ def get_all_counts(user_id):
         A list of all the counts that the user has made
     """
 
-    return sql.execute("SELECT Count_i from Count_Data where User_ID = ?", (user_id,)).fetchall()
+    return [t[0] for t in c.execute("SELECT Count_i from Count_Data where User_ID = ?", (user_id,)).fetchall()]
+
+def count(user_id):
+    c.execute("INSERT INTO Count_Data (user_id) VALUES (?)", (user_id,))
+    conn.commit()
